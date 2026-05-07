@@ -55,7 +55,7 @@ Este projeto foi desenvolvido por:
 * **Jordana Moreira** 
 * **Caio Godoy** 
 * **Gabriella Lima**
-* 
+
 ---
 
 ## 📂 Estrutura de Arquivos
