@@ -1,0 +1,613 @@
+:root {
+    --primary: #8B4513; 
+    --secondary: #D2B48C; 
+    --accent: #4169E1; 
+    --bg-light: #F5F5DC; 
+
+    /* VARIÁVEIS MELHORADAS PARA DARK MODE */
+    --bg-dark-body: #121212; 
+    --bg-dark-card: #1E1E1E; 
+    --text-light: #3E2723; 
+    --text-dark: #E0E0E0; 
+    --border-dark: #333333; 
+    --shadow: rgba(0,0,0,0.15);
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Estilos de Título e Seção*/
+h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
+}
+
+.section-title {
+    color: var(--primary);
+    border-bottom: 3px solid var(--secondary);
+    display: inline-block;
+}
+
+/* --- MODO ESCURO (DARK MODE) --- */
+
+body.dark-mode {
+    background-color: var(--bg-dark-body) !important;
+    color: var(--text-dark);
+}
+/* Cores do texto no dark mode */
+body.dark-mode p, body.dark-mode small { color: var(--text-dark) !important; }
+body.dark-mode .text-muted { color: var(--text-dark) !important; }
+body.dark-mode .bg-light { background-color: var(--bg-dark-body) !important; }
+body.dark-mode .section-title { 
+    color: var(--secondary); /* Usa o bege (secondary) */
+    border-bottom-color: var(--border-dark); 
+}
+body.dark-mode a { color: var(--secondary); }
+
+/* Cards do catálogo no dark mode */
+body.dark-mode #catalogs .card {
+    background-color: var(--bg-dark-card) !important;
+    border-color: var(--border-dark) !important;
+}
+
+
+/* NAV - Estilo Clássico (Marrom)*/
+#main-nav {
+    background-color: var(--primary) !important;
+    box-shadow: 0 2px 10px var(--shadow);
+}
+.navbar-brand, .nav-link {
+    color: var(--text-dark) !important;
+    transition: color 0.3s ease;
+}
+.nav-link:hover {
+    color: var(--secondary) !important;
+}
+
+/* HEADER - Hero com Tag Imagem e Overlay ADICIONADOS*/
+.hero {
+    background: none; 
+    position: relative; 
+    overflow: hidden; 
+    padding-top: 100px !important;
+    z-index: 1;
+}
+
+/* Estilizando a tag <img>*/
+.hero-image-tag {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2; 
+}
+
+/* Camada de Overlay semi-transparente (Marrom) para garantir a leitura do texto*/
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(139, 69, 19, 0.75); 
+    z-index: -1; 
+}
+
+/* Garante que o conteúdo do hero (texto e botão) esteja na frente*/
+.hero .container {
+    position: relative;
+    z-index: 10;
+    background: rgba(245, 245, 220, 0.1); 
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Botão CTA*/
+.cta-button {
+    background-color: var(--secondary) !important;
+    color: var(--primary) !important;
+    border-color: var(--primary) !important;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3);
+    border-radius: 50px;
+    box-shadow: 0 5px 15px var(--shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px var(--shadow);
+    background-color: #D2B48C !important;
+}
+
+/* 2. Posts (Cards) - Estilo Livro/Pergaminho*/
+.post.card {
+    background-color: #FAF0E6; /* Cor de pergaminho (claro) */
+    border: 1px solid var(--secondary);
+    box-shadow: 0 5px 15px var(--shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeIn 0.5s ease-in;
+    height: 100%;
+}
+
+body.dark-mode .post.card {
+    background-color: var(--bg-dark-card) !important; /* Cinza escuro */
+    border-color: var(--border-dark) !important;
+}
+
+.post.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px var(--shadow);
+}
+
+
+.post .card-title {
+    color: var(--primary);
+    font-family: 'Playfair Display', serif;
+    padding-right: 40px; 
+}
+body.dark-mode .post .card-title {
+    color: var(--secondary); /* Usa o bege (secondary) no dark mode */
+}
+
+body.dark-mode .card-subtitle.text-muted {
+    color: var(--text-dark) !important;
+}
+
+.rating-stars {
+    font-size: 20px;
+    font-weight: bold;
+    color: #FFD700;
+}
+
+/* BOTÃO LIKE*/
+.like-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: #aaa; 
+    z-index: 10;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+.like-btn:hover { color: #FF6347; transform: scale(1.2); }
+.like-btn.liked { color: #FF6347; }
+
+
+/* 3. Formulário e Campos*/
+
+/* Cartões de Fundo - Opinião e Sobre Nós*/
+#form-card, #about-card {
+    background-color: #F0E68C; 
+    border: 1px solid var(--secondary);
+}
+
+body.dark-mode #form-card, body.dark-mode #about-card {
+    background-color: var(--bg-dark-card) !important; 
+    border-color: var(--border-dark);
+}
+
+/* Estilo para inputs e selects*/
+.form-control, .form-select {
+    border: 1px solid var(--secondary);
+    box-shadow: none;
+    transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark Mode para inputs e selects */
+body.dark-mode .form-control, body.dark-mode .form-select {
+    background-color: #333333; /* Fundo do input mais escuro que o card */
+    color: var(--text-dark);
+    border-color: #555555;
+}
+/* Placeholder no Dark Mode */
+body.dark-mode .form-control::placeholder {
+    color: #AAAAAA; 
+}
+body.dark-mode .input-group-text {
+    background-color: var(--bg-dark-card);
+    color: var(--text-dark);
+    border-color: #555555;
+}
+
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 0.25rem rgba(139, 69, 19, 0.25);
+}
+
+/* Botão de Submissão*/
+.custom-submit-btn {
+    background-color: var(--primary) !important;
+    border-color: var(--primary) !important;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+.custom-submit-btn:hover {
+    background-color: #A0522D !important;
+    border-color: #A0522D !important;
+    opacity: 0.95;
+}
+
+.success-message {
+    display: none;
+    color: var(--accent);
+    font-weight: bold;
+}
+.success-message.show {
+    display: block;
+    animation: fadeInOut 3s ease-in-out;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(10px); }
+    20% { opacity: 1; transform: translateY(0); }
+    80% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-10px); }
+}
+
+/* FOOTER*/
+.footer {
+    background-color: var(--primary);
+    color: var(--text-dark);
+    margin-top: 40px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Estilos do Carrossel de Capas --- */
+.carousel-inner {
+    padding-top: 20px;
+    padding-bottom: 70px; 
+}
+
+/* CONTAINER GERAL DO CARD FLIP */
+.flip-card-container {
+    perspective: 1000px;
+    width: 100%;
+    max-width: 250px; 
+    height: 400px; /* Altura fixa para o flip */
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.flip-card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    box-shadow: 0 5px 15px var(--shadow);
+}
+
+/* Efeito de virada ao clicar */
+.flip-card-container:hover .flip-card {
+    transform: rotateY(180deg);
+}
+
+/* LADOS DO CARD */
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden; 
+    backface-visibility: hidden;
+    border-radius: 5px;
+    background-color: #FAF0E6; 
+    border: 5px solid var(--primary); 
+    color: var(--text-light);
+}
+
+body.dark-mode .flip-card-front, body.dark-mode .flip-card-back {
+    background-color: var(--bg-dark-card) !important; 
+    border-color: var(--secondary) !important; 
+    color: var(--text-dark);
+}
+
+.flip-card-back {
+    transform: rotateY(180deg);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilo para a capa do livro na FRENTE do card */
+.book-cover {
+    width: 90%; 
+    max-width: 200px; 
+    height: auto;
+    object-fit: contain;
+    margin-top: 10px;
+    border: 2px solid var(--secondary); 
+    border-radius: 5px;
+    box-shadow: 5px 5px 10px var(--shadow);
+    transition: none; 
+}
+
+.book-cover:hover {
+    transform: none;
+}
+
+/* Garante que o texto da legenda seja centralizado e visível */
+.carousel-caption {
+    position: static; 
+    padding-top: 20px;
+    color: var(--text-light) !important; 
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Estilo geral para os botões de controle (setas) */
+.carousel-control-prev,
+.carousel-control-next {
+    width: 8%; 
+    opacity: 1; 
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.7); 
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: transparent; 
+    border: none;
+    border-radius: 0;
+    padding: 0; 
+    height: 40px; 
+    width: 40px; 
+    filter: invert(30%) sepia(100%) saturate(500%) hue-rotate(30deg);
+    background-size: 100%; 
+    transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+/* Efeito ao passar o mouse */
+.carousel-control-prev:hover .carousel-control-prev-icon,
+.carousel-control-next:hover .carousel-control-next-icon {
+    filter: invert(80%) sepia(10%) saturate(600%) hue-rotate(340deg); 
+    transform: scale(1.2); 
+}
+
+/* Modo Escuro para as setas */
+body.dark-mode .carousel-control-prev-icon,
+body.dark-mode .carousel-control-next-icon {
+    filter: invert(80%); /* Cinza claro */
+}
+
+
+/* Estilização do Footer com 3 colunas */
+.footer {
+    background-color: var(--primary); 
+    color: var(--text-dark);
+    margin-top: 40px;
+}
+
+/* Links do Rodapé */
+.footer-link {
+    color: var(--secondary) !important; /* Cor clara para os links */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.footer-link:hover {
+    color: var(--bg-light) !important; /* Cor mais clara no hover */
+    text-decoration: underline;
+}
+
+/* Ícones Sociais */
+.social-icons a {
+    color: var(--text-dark) !important; /* Cor clara para os ícones */
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.social-icons a:hover {
+    color: var(--secondary) !important; /* Cor secundária no hover */
+    transform: scale(1.1);
+}
+
+/* Modo Escuro para o footer*/
+body.dark-mode .footer {
+    background-color: #2F2F2F; /* Cinza escuro no dark mode para um toque diferente da body */
+}
+body.dark-mode .footer-link {
+    color: var(--accent) !important; /* Usa a cor de destaque para links no dark mode */
+}
+body.dark-mode .social-icons a {
+    color: var(--text-dark) !important; 
+}
+body.dark-mode .social-icons a:hover {
+    color: var(--accent) !important;
+}
+
+/* Estilo para o Card de Feedback - Cor de Destaque */
+.feedback-card {
+    background-color: var(--secondary) !important; /* Marrom claro/Bege (light mode) */
+    border: 1px solid var(--primary);
+}
+
+/* Garante que o modo escuro funcione no card de feedback */
+body.dark-mode .feedback-card {
+    background-color: var(--bg-dark-card) !important; /* Cinza escuro (dark mode) */
+    color: var(--text-dark);
+    border-color: var(--border-dark);
+}
+
+/* Botão de Feedback (cor secundária) */
+.custom-feedback-btn {
+    background-color: var(--primary) !important;
+    border-color: var(--primary) !important;
+    color: var(--text-dark) !important;
+    transition: background-color 0.3s ease;
+}
+.custom-feedback-btn:hover {
+    background-color: #A0522D !important;
+    border-color: #A0522D !important;
+    opacity: 0.95;
+}
+
+/* Mensagem de sucesso do feedback */
+.success-message-feedback {
+    display: none;
+    color: var(--primary);
+    font-weight: bold;
+}
+.success-message-feedback.show {
+    display: block;
+    animation: fadeInOut 3s ease-in-out;
+}
+body.dark-mode .success-message-feedback {
+    color: var(--secondary);
+}
+
+/* --- Visibilidade dos Indicadores do Carrossel --- */
+.carousel-indicators [data-bs-target] {
+    background-color: var(--primary); /* Usa o marrom para os indicadores no modo claro */
+    opacity: 0.7; 
+}
+.carousel-indicators .active {
+    background-color: var(--primary); /* Cor primária mais forte para o indicador ativo */
+    opacity: 1; 
+}
+/* Modo Escuro para Indicadores: Inverte a cor para o bege/branco */
+body.dark-mode .carousel-indicators [data-bs-target] {
+    background-color: var(--text-dark); /* Usa o branco/claro do dark mode */
+}
+body.dark-mode .carousel-indicators .active {
+    background-color: var(--secondary); /* Usa o bege ou branco para destaque */
+}
+
+/* Estilização dos Autores no Footer */
+.footer-author {
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.footer-author:hover {
+    transform: translateY(-3px);
+}
+
+.footer-author p {
+    font-weight: 600;
+    color: var(--secondary); /* Usa o bege claro do seu tema */
+}
+
+.github-link img {
+    filter: brightness(0) invert(1); /* Deixa o ícone do GitHub branco para contrastar com o marrom */
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.github-link:hover img {
+    opacity: 1;
+}
+
+/* Ajuste para o Dark Mode se necessário */
+body.dark-mode .footer-author p {
+    color: var(--text-dark);
+}
+/* --- ACESSIBILIDADE --- */
+html {
+    font-size: 16px;
+    transition: font-size 0.2s ease;
+}
+
+body.high-contrast {
+    background-color: #000 !important;
+    color: #fff !important;
+}
+
+body.high-contrast .card, 
+body.high-contrast .navbar, 
+body.high-contrast footer,
+body.high-contrast .modal-content,
+body.high-contrast .list-group-item {
+    background-color: #000 !important;
+    border: 2px solid #fff !important;
+    color: #fff !important;
+}
+
+body.high-contrast a, 
+body.high-contrast .btn:not(.btn-outline-light) {
+    background-color: #ffff00 !important;
+    color: #000 !important;
+    font-weight: bold !important;
+}
+
+body.high-contrast .section-title {
+    color: #ffff00 !important;
+    border-bottom-color: #fff !important;
+}
+
+body.high-contrast .text-muted,
+body.high-contrast .text-white-50 {
+    color: #fff !important;
+}
+
+/* Widget de Acessibilidade Flutuante */
+.accessibility-widget {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 3000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.widget-toggle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease;
+}
+
+.widget-toggle:hover {
+    transform: scale(1.1);
+}
+
+.widget-content {
+    display: none; /* Escondido por padrão */
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    margin-bottom: 10px;
+    width: 200px;
+    border: 1px solid var(--secondary);
+}
+
+.widget-content.active {
+    display: block; /* Mostra quando ativo */
+}
+
+.shortcuts-info p {
+    margin-bottom: 5px;
+    line-height: 1.2;
+    color: #555;
+}
+
+/* Ajuste para o modo de alto contraste */
+body.high-contrast .widget-content {
+    background-color: #000;
+    color: #fff;
+    border: 1px solid #fff;
+}
+body.high-contrast .widget-content button {
+    color: #fff;
+    border-color: #fff;
+}
+

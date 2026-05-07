@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca Virtual - Blog de Livros</title>
+    <link rel="icon" href="livro.png" type="image/x-icon">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-light">
+    <!-- Barra de Acessibilidade -->
+    <div class="accessibility-widget" id="accessibilityWidget">
+    <button class="widget-toggle" onclick="toggleWidget()" title="Opções de Acessibilidade">
+        ♿
+    </button>
+    
+    <div class="widget-content">
+        <h6 class="mb-2">Acessibilidade</h6>
+        <div class="d-flex justify-content-center gap-2 mb-3">
+            <button onclick="changeFontSize('increase')" class="btn btn-sm btn-outline-dark" title="Aumentar Fonte">A+</button>
+            <button onclick="changeFontSize('decrease')" class="btn btn-sm btn-outline-dark" title="Diminuir Fonte">A-</button>
+            <button onclick="toggleContrast()" class="btn btn-sm btn-outline-dark" title="Alto Contraste">🌓</button>
+        </div>
+        <hr>
+        <div class="shortcuts-info">
+            <p><small><strong>Atalhos:</strong></small></p>
+            <p><small>Alt + 1: Aumentar Fonte</small></p>
+            <p><small>Alt + 2: Diminuir Fonte</small></p>
+            <p><small>Alt + 3: Alto Contraste</small></p>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="main-nav">
+        <div class="container">
+            <a class="navbar-brand text-light fw-bold" href="#">
+                <h2 class="h4 mb-0">Biblioteca Virtual</h2>
+            </a>
+    
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="#posts">Posts</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#news">Notícias</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#catalogs">Catálogos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#add-post">Comentário</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">Sobre Nós</a></li>
+                </ul>
+                <div class="d-flex">
+                    <button class="dark-mode-toggle btn btn-outline-light me-2" id="darkModeToggle" aria-label="Alternar modo escuro">🌙</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero text-white text-center py-5">
+        <img src="fundo biblioteca.jpg" alt="Prateleira de livros antigos" class="hero-image-tag">
+        
+        <div class="container">
+            <h1 class="display-3 fw-bold mt-5">Descubra Mundos Entre Páginas</h1>
+            <p class="lead fst-italic">"Um leitor vive mil vidas antes de morrer. O homem que nunca lê vive apenas uma." – George R.R. Martin</p>
+            <a href="#add-post" class="cta-button btn btn-lg mt-3">Compartilhe sua Opinião</a>
+        </div>
+    </header>
+
+    <main class="container mt-5">
+        
+        <section id="featured" class="mb-5 py-4">
+            <h2 class="text-center mb-4 pb-2 section-title">Destaques da Semana</h2>
+            <div class="row g-4" id="featuredPosts">
+                </div>
+        </section>
+
+        <section id="posts" class="mb-5 py-4">
+            <h2 class="text-center mb-4 pb-2 section-title">Opiniões de Leitores</h2>
+            <div class="row mb-4 align-items-center">
+                <div class="col-md-4 mb-2 mb-md-0">
+                    <select class="form-select" id="genreFilter" aria-label="Filtrar por gênero">
+                        <option value="">Todos os Gêneros</option>
+                        <option value="romance">Romance</option>
+                        <option value="ficcao_cientifica">Ficção Científica</option>
+                        <option value="fantasia">Fantasia</option>
+                        <option value="thriller">Thriller</option>
+                        <option value="infantil">Infantil</option>
+                        <option value="biografia">Biografia</option>
+                        <option value="outros">Outros</option>
+                    </select>
+                </div>
+                
+                <div class="col-md-4 mb-2 mb-md-0">
+                    <select class="form-select" id="ratingFilter" aria-label="Filtrar por avaliação">
+                        <option value="">Todas as Avaliações</option>
+                        <option value="5">★★★★★ (5 Estrelas)</option>
+                        <option value="4">★★★★☆ (4 Estrelas)</option>
+                        <option value="3">★★★☆☆ (3 Estrelas)</option>
+                        <option value="2">★★☆☆☆ (2 Estrelas)</option>
+                        <option value="1">★☆☆☆☆ (1 Estrela)</option>
+                    </select>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <span class="input-group-text" id="basic-addon1" aria-label="Ícone de busca">🔍</span>
+                        <input type="text" class="form-control" id="searchInput" placeholder="Buscar por título, autor ou opinião..." aria-label="Buscar posts">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row g-4" id="postsContainer">
+                </div>
+        </section>
+
+        <section id="news" class="mb-5 py-4">
+            <h2 class="text-center mb-4 pb-2 section-title">Notícias do Mundo Literário</h2>
+            <div class="row g-4">
+                
+                <div class="col-md-6">
+                    <div class="post card h-100 p-3">
+                        <h3 class="card-title h5">Grande Anúncio: Quem Venceu o Prêmio Nobel de Literatura deste Ano?</h3>
+                        <p class="text-muted"><small>Publicado em 2/12/2025</small></p>
+                        <p class="card-text">A Academia Sueca surpreendeu a todos ao premiar um poeta conhecido por sua lírica densa e temas de exílio. Conheça a trajetória do novo laureado e suas obras essenciais.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="post card h-100 p-3">
+                        <h3 class="card-title h5">O AudioBook e E-book Dominam o Mercado: Vendas Aumentam 40%</h3>
+                        <p class="text-muted"><small>Publicado em 10/12/2025</small></p>
+                        <p class="card-text">O mercado digital continua a transformar a leitura. Relatório aponta que a conveniência dos audiolivros está impulsionando um novo público, especialmente entre jovens leitores.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="post card h-100 p-3">
+                        <h3 class="card-title h5">Clássico da Literatura Brasileira Ganha Adaptação de Grande Orçamento para Streaming</h3>
+                        <p class="text-muted"><small>Publicado em 08/12/2025</small></p>
+                        <p class="card-text">Um dos romances mais aclamados do país, que aborda questões sociais profundas, está sendo transformado em uma série de alto nível. A produção promete fidelidade e modernidade.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="post card h-100 p-3">
+                        <h3 class="card-title h5">Feira Internacional do Livro de Frankfurt Estabelece Novo Recorde Global</h3>
+                        <p class="text-muted"><small>Publicado em 05/12/2025</small></p>
+                        <p class="card-text">O maior evento do mercado editorial mundial celebrou o maior número de contratos de tradução e venda de direitos autorais da sua história, sinalizando um mercado vibrante e globalizado.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+        
+        <section id="catalogs" class="mb-5 py-4">
+            <h2 class="text-center mb-4 pb-2 section-title">Catálogos e Listas de Leitura</h2>
+            <div class="card p-4 shadow-sm text-center">
+                <p class="lead">Navegue pelas capas dos livros recomendados e clique para ver a sinopse!</p>
+                
+                <div id="bookCarousel" class="carousel slide" data-bs-ride="carousel">
+                    
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#bookCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#bookCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#bookCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        <button type="button" data-bs-target="#bookCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                        <button type="button" data-bs-target="#bookCarousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
+                        <button type="button" data-bs-target="#bookCarousel" data-bs-slide-to="5" aria-label="Slide 6"></button>
+                    </div>
+                    
+                    <div class="carousel-inner">
+                        
+                        <div class="carousel-item active">
+                            <div class="flip-card-container mx-auto">
+                                <div class="flip-card">
+                                    <div class="flip-card-front">
+                                        <img src="capa como eu era antes de você.jpeg" class="book-cover" alt="Capa do Livro 1 -Como eu era antes de você">
+                                        <h5 class="fw-bold mt-2">Como Eu Era Antes de Você</h5>
+                                    </div>
+                                    <div class="flip-card-back p-3 d-flex flex-column justify-content-center align-items-center">
+                                        <h5 class="fw-bold text-center">Como Eu Era Antes de Você</h5>
+                                        <p class="text-center">Uma história de amor e uma história de família, mas acima de tudo é uma história sobre a coragem e o esforço necessários para retomar a vida quando tudo parece acabado.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="carousel-item">
+                            <div class="flip-card-container mx-auto">
+                                <div class="flip-card">
+                                    <div class="flip-card-front">
+                                        <img src="capa fazendo meu filme.jpeg" class="book-cover" alt="Capa do Livro 2 - Fazendo meu filme">
+                                        <h5 class="fw-bold mt-2">Fazendo Meu Filme</h5>
+                                    </div>
+                                    <div class="flip-card-back p-3 d-flex flex-column justify-content-center align-items-center">
+                                        <h5 class="fw-bold text-center">Fazendo Meu Filme</h5>
+                                        <p class="text-center">O fascinante universo de uma menina cheia de expectativas, que vive a dúvida entre continuar sua rotina, com seus amigos, familiares, estudos e seu inesperado novo amor, ou se aventurar em outro país e mergulhar num mundo cheio de novas possibilidades.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="carousel-item">
+                            <div class="flip-card-container mx-auto">
+                                <div class="flip-card">
+                                    <div class="flip-card-front">
+                                        <img src="Capa O pequeno principe.jpg" class="book-cover" alt="Capa do Livro 3 - O Pequeno Príncipe">
+                                        <h5 class="fw-bold mt-2">O Pequeno Príncipe</h5>
+                                    </div>
+                                    <div class="flip-card-back p-3 d-flex flex-column justify-content-center align-items-center">
+                                        <h5 class="fw-bold text-center">O Pequeno Príncipe</h5>
+                                        <p class="text-center">O essencial é invisível aos olhos, o que significa que as coisas mais importantes da vida como amizade, amor e pureza de sentimentos devem ser vistas com o coração.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-item">
+                            <div class="flip-card-container mx-auto">
+                                <div class="flip-card">
+                                    <div class="flip-card-front">
+                                        <img src="capa quarta asa.jpeg" class="book-cover" alt="Capa do Livro 4 - Quarta Asa">
+                                        <h5 class="fw-bold mt-2">Quarta Asa</h5>
+                                    </div>
+                                    <div class="flip-card-back p-3 d-flex flex-column justify-content-center align-items-center">
+                                        <h5 class="fw-bold text-center">Quarta Asa</h5>
+                                        <p class="text-center">Violet Sorrengail, uma jovem magra e frágil, forçada pela mãe a entrar na academia militar de elite de Navarre para se tornar uma cavaleira de dragões, onde a regra é sobreviver ou morrer, lidando com treinamentos brutais, inimigos (como Xaden Riorson) e um segredo terrível do reino.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="carousel-item">
+                            <div class="flip-card-container mx-auto">
+                                <div class="flip-card">
+                                    <div class="flip-card-front">
+                                        <img src="capa divinos rivais.jpg" class="book-cover" alt="Capa do Livro 5 - Divinos Rivais">
+                                        <h5 class="fw-bold mt-2">Divinos Rivais</h5>
+                                    </div>
+                                    <div class="flip-card-back p-3 d-flex flex-column justify-content-center align-items-center">
+                                        <h5 class="fw-bold text-center">Divinos Rivais</h5>
+                                        <p class="text-center">Iris Winnow é uma jornalista de 18 anos que sonha em conquistar a vaga de colunista no jornal em que trabalha, a Gazeta de Oath. Em meio a uma guerra entre poderosos deuses ela luta para ajudar sua mãe, que sofre para superar um vício, e para encontrar o irmão, que está desaparecido em meio às trincheiras da guerra.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-item">
+                            <div class="flip-card-container mx-auto">
+                                <div class="flip-card">
+                                    <div class="flip-card-front">
+                                        <img src="capa A Hipotese do Amor.jpg" class="book-cover" alt="Capa do Livro 6 - A Hipotese do Amor">
+                                        <h5 class="fw-bold mt-2">A Hipotese do Amor</h5>
+                                    </div>
+                                    <div class="flip-card-back p-3 d-flex flex-column justify-content-center align-items-center">
+                                        <h5 class="fw-bold text-center">A Hipotese do Amor</h5>
+                                        <p class="text-center">É um romance que narra a história de Olive Smith, uma estudante de doutorado em biologia, que finge estar namorando o renomado e temido professor de ciência Adam Carlsen.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                    <button class="carousel-control-prev" type="button" data-bs-target="#bookCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Anterior</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#bookCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Próximo</span>
+                    </button>
+                    
+                </div>
+            </div>
+        </section>
+
+        <section id="add-post" class="mb-5 py-4">
+            <h2 class="text-center mb-4 pb-2 section-title">Adicione Sua Opinião</h2>
+            <div class="card p-4 shadow-sm" id="form-card">
+                <form id="addPostForm">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="bookTitle" placeholder="Título do Livro" required aria-label="Título do livro">
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="bookAuthor" placeholder="Autor do Livro" required aria-label="Autor do livro">
+                    </div>
+                    <div class="mb-3">
+                        <select class="form-select" id="bookGenre" required aria-label="Gênero do livro">
+                            <option value="">Selecione o Gênero</option>
+                            <option value="romance">Romance</option>
+                            <option value="ficcao_cientifica">Ficção Científica</option>
+                            <option value="fantasia">Fantasia</option>
+                            <option value="thriller">Thriller</option>
+                            <option value="infantil">Infantil</option>
+                            <option value="biografia">Biografia</option>
+                            <option value="outros">Outros</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <select class="form-select" id="rating" required aria-label="Avaliação com estrelas">
+                            <option value="">Selecione uma avaliação</option>
+                            <option value="5">★★★★★ - Gostei muito</option>
+                            <option value="4">★★★★☆ - Bom</option>
+                            <option value="3">★★★☆☆ - Razoável</option>
+                            <option value="2">★★☆☆☆ - Ruim</option>
+                            <option value="1">★☆☆☆☆ - Muito ruim</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <textarea class="form-control" id="opinion" placeholder="Sua opinião sobre o livro" rows="4" required aria-label="Opinião"></textarea>
+                    </div>
+                    <div class="mb-4">
+                        <textarea class="form-control" id="recommendations" placeholder="Recomendações de outros livros" rows="3" required aria-label="Recomendações"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg w-100 custom-submit-btn">Publicar Opinião</button>
+                    <p class="success-message text-center mt-3" id="successMsg" role="alert">Opinião publicada com sucesso! Obrigado por contribuir.</p>
+                </form>
+            </div>
+        </section>
+
+        <section id="about" class="mb-5 py-4">
+            <h2 class="text-center mb-4 pb-2 section-title">Sobre Nossa Biblioteca</h2>
+            
+            <div class="card p-4 shadow-sm mb-4" id="about-card">
+                <p>"Não há amigo tão leal quanto um livro." – Ernest Hemingway. É com esse espírito que criamos a Biblioteca Virtual, um refúgio digital para quem vê a leitura não como um passatempo, mas como uma jornada.</p>
+                <p>Acreditamos que, como disse Carlos Drummond de Andrade, "A leitura é uma fonte inesgotável de prazer, mas por incrível que pareça, a quase totalidade, não sente esta sede." Nossa missão é despertar essa sede. Aqui, cada opinião compartilhada é uma nova porta aberta, cada recomendação é um mapa para um tesouro escondido.</p>
+                <p>Somos uma comunidade de leitores que vivem mil vidas. Este espaço é seu para compartilhar suas aventuras, descobrir novos mundos e conectar-se com outras pessoas que entendem que "um livro deve ser o machado que quebra o mar gelado em nós." – Franz Kafka. Sinta-se em casa.</p>
+            </div>
+            
+            <div class="card p-4 shadow-sm feedback-card" id="feedback-card">
+                <h3 class="h5 text-center mb-3">Sua Opinião é Valiosa!</h3>
+                <p class="text-center text-muted">Ajude-nos a melhorar a Biblioteca Virtual deixando seu feedback anônimo.</p>
+                <form id="feedbackForm">
+                    <div class="mb-3">
+                        <textarea class="form-control" id="feedbackText" placeholder="Seu feedback, sugestões ou críticas construtivas..." rows="4" required aria-label="Texto do feedback"></textarea>
+                    </div>
+                    <div class="mb-3 form-check text-center">
+                        <input type="checkbox" class="form-check-input" id="feedbackAnonymous" checked>
+                        <label class="form-check-label" for="feedbackAnonymous">Enviar como Anônimo</label>
+                    </div>
+                    <button type="submit" class="btn btn-secondary w-100 custom-feedback-btn">Enviar Feedback</button>
+                    <p class="success-message-feedback text-center mt-3" id="feedbackSuccessMsg" role="alert">Feedback enviado com sucesso! Agradecemos sua contribuição.</p>
+                </form>
+            </div>
+            
+        </section>
+    </main>
+
+    <footer class="footer py-5 text-white">
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
+                    <h5 class="fw-bold">Biblioteca Virtual</h5>
+                    <p class="mb-0">&copy; 2026 Todos os direitos reservados.</p>
+                </div>
+                
+                <div class="col-md-4 text-center"> 
+                    <h5 class="text-uppercase mb-3 fw-bold w-100">Desenvolvido por</h5>
+                    <div class="d-flex justify-content-center gap-4">
+                        <div class="footer-author">
+                            <p class="mb-1 small">Jordana Moreira</p>
+                            <a href="https://github.com/Jordana-code" target="_blank" class="github-link">
+                                <img src="https://img.icons8.com/material-outlined/24/FFFFFF/github.png" alt="GitHub Jordana">
+                            </a>
+                        </div>
+                        <div class="footer-author">
+                            <p class="mb-1 small">Caio de Godoy</p>
+                            <a href="https://github.com/1caiogodoy" target="_blank" class="github-link">
+                                <img src="https://img.icons8.com/material-outlined/24/FFFFFF/github.png" alt="GitHub Caio">
+                            </a>
+                        </div>
+                        <div class="footer-author">
+                            <p class="mb-1 small">Gabriella Lima</p>
+                            <a href="https://github.com/gabriellalmendes" target="_blank" class="github-link">
+                                <img src="https://img.icons8.com/material-outlined/24/FFFFFF/github.png" alt="GitHub Gabriella">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 text-center text-md-end">
+                    <h5 class="fw-bold">Acesse Nossos perfis no LinkedIn</h5>
+                    <!-- Mudança: d-inline-flex para que o bloco não ocupe a tela toda, permitindo o alinhamento à direita do container pai -->
+                    <div class="social-icons d-inline-flex flex-column align-items-start">
+                        
+                        <!-- Link 1 -->
+                        <a href="https://www.linkedin.com/in/jordana-moreira-6a5b81380/" class="text-white mb-2 text-decoration-none footer-social-link d-flex align-items-center" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-linkedin me-2" viewBox="0 0 16 16">
+                                <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.432.567-.88 1.234-.88.87 0 1.218.663 1.218 1.633v3.822h2.404V9.24c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+                            </svg>
+                            <span>Jordana Moreira</span>
+                        </a>
+
+                        <!-- Link 2 -->
+                        <a href="https://www.linkedin.com/in/1caiogodoy/" class="text-white mb-2 text-decoration-none footer-social-link d-flex align-items-center" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-linkedin me-2" viewBox="0 0 16 16">
+                                <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.432.567-.88 1.234-.88.87 0 1.218.663 1.218 1.633v3.822h2.404V9.24c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+                            </svg>
+                            <span>Caio Godoy</span>
+                        </a>
+
+                        <!-- Link 3 -->
+                        <a href="https://www.linkedin.com/in/gabriella-lima-mendes-262298363/" class="text-white mb-2 text-decoration-none footer-social-link d-flex align-items-center" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-linkedin me-2" viewBox="0 0 16 16">
+                                <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.432.567-.88 1.234-.88.87 0 1.218.663 1.218 1.633v3.822h2.404V9.24c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+                            </svg>
+                            <span>Gabriella Lima</span>
+                        </a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+</body>
+</html>
