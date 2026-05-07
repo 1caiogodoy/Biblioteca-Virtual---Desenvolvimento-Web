@@ -50,7 +50,7 @@ O projeto utiliza tecnologias web modernas e leves:
 
 ## 🤝 Contribuidores
 
-Este projeto foi desenvolvido por:
+Este projeto foi desenvolvido, projetado e documentado por:
 
 * **Jordana Moreira** 
 * **Caio Godoy** 
