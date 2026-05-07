@@ -6,7 +6,7 @@ Uma plataforma web interativa e inclusiva dedicada a entusiastas da leitura, ond
 
 ## 🔗 Acesse o Projeto
 Você pode visualizar o site em funcionamento através do link abaixo:
-👉 **[Clique aqui para acessar a Biblioteca Virtual](https://gabriellalimam.github.io/Biblioteca-Virtual/)**
+👉 **[Clique aqui para acessar a Biblioteca Virtual]([https://gabriellalimam.github.io/Biblioteca-Virtual/](https://jordana-code.github.io/Biblioteca-Virtual---Desenvolvimento-Web/))**
 
 ---
 
